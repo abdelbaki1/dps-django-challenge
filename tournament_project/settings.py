@@ -53,16 +53,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tournament_project.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'tournament_db'),
-        'USER': os.environ.get('POSTGRES_USER', 'tournament_user'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'tournament_pass'),
-        'HOST': os.environ.get('POSTGRES_HOST', 'db'),
-        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+# Database configuration - supports both PostgreSQL (Docker) and SQLite (local)
+USE_SQLITE = os.environ.get('USE_SQLITE', 'False') == 'True'
+
+if USE_SQLITE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_DB', 'tournament_db'),
+            'USER': os.environ.get('POSTGRES_USER', 'tournament_user'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'tournament_pass'),
+            'HOST': os.environ.get('POSTGRES_HOST', 'db'),
+            'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

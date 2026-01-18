@@ -86,8 +86,104 @@ docker-compose exec django python manage.py shell
 docker-compose up --build
 ```
 
+---
+
+### Option 2: Local Development (Without Docker)
+
+**Prerequisites:**
+- Python 3.11+
+- pip and pipenv (or just pip)
+
+**Note:** This option uses SQLite database (no PostgreSQL installation required).
+
+**Installation Steps:**
+
+1. **Clone and Setup Project**
+   ```bash
+   # Clone the repository
+   git clone <your-repo-url>
+   cd dps-django-challenge
+   ```
+
+2. **Install Dependencies**
+   
+   **Option A: Using pipenv (Recommended)**
+   ```bash
+   # Install pipenv if not installed
+   pip install pipenv
+   
+   # Install dependencies
+   pipenv install
+   
+   # Activate virtual environment
+   pipenv shell
+   ```
+   
+   **Option B: Using pip and requirements.txt**
+   ```bash
+   # Create virtual environment
+   python -m venv venv
+   
+   # Activate virtual environment
+   # On Linux/macOS:
+   source venv/bin/activate
+   # On Windows:
+   venv\Scripts\activate
+   
+   # Install dependencies
+   pip install -r requirements.txt
+   ```
+
+3. **Configure for SQLite**
+   ```bash
+   # Create a local environment file
+   echo "USE_SQLITE=True" > .env.local
+   
+   # Or set environment variable directly
+   export USE_SQLITE=True  # Linux/macOS
+   set USE_SQLITE=True     # Windows CMD
+   $env:USE_SQLITE="True"  # Windows PowerShell
+   ```
+
+4. **Run Migrations**
+   ```bash
+   python manage.py migrate
+   ```
+   
+   This will create a `db.sqlite3` file in your project root.
+
+5. **Create Superuser (Optional)**
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+6. **Run Development Server**
+   ```bash
+   python manage.py runserver
+   ```
 
 The application will be accessible at `http://localhost:8000`.
+
+**Useful Local Development Commands:**
+
+```bash
+# Run tests
+python manage.py test
+
+# Create migrations after model changes
+python manage.py makemigrations
+
+# Apply migrations
+python manage.py migrate
+
+# Access Django shell
+python manage.py shell
+
+# Collect static files
+python manage.py collectstatic
+```
+
+---
 
 ## AI Usage Rules
 
