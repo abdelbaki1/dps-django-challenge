@@ -13,16 +13,14 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install pipenv
 
-COPY Pipfile Pipfile.lock* ./
+COPY requirements.txt /app/
 
-RUN pipenv install --system --deploy --ignore-pipfile || pipenv install --system
+RUN pipenv install -r requirements.txt && pipenv install --system
 
-COPY . .
-
+COPY docker-entrypoint.sh /app/docker-entrypoint.sh
 RUN chmod +x /app/docker-entrypoint.sh
+
+COPY . /app
 
 EXPOSE 8000
 
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
-
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
