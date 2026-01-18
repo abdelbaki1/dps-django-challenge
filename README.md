@@ -58,13 +58,6 @@ docker-compose up --build
 docker-compose -f docker-compose.prod.yml up --build
 ```
 
-**Alternative: Docker with SQLite**
-
-```bash
-# Use SQLite instead of PostgreSQL
-docker-compose -f docker-compose.sqlite.yml up --build
-```
-
 **Useful Docker Commands:**
 
 ```bash
@@ -75,48 +68,21 @@ docker-compose down
 docker-compose logs -f
 
 # Run migrations manually
-docker-compose exec web python manage.py migrate
+docker-compose exec django python manage.py migrate
 
 # Create superuser
-docker-compose exec web python manage.py createsuperuser
+docker-compose exec django python manage.py createsuperuser
 
 # Run tests
-docker-compose exec web python manage.py test
+docker-compose exec django python manage.py test
 
 # Access Django shell
-docker-compose exec web python manage.py shell
+docker-compose exec django python manage.py shell
 
 # Rebuild container after dependency changes
 docker-compose up --build
 ```
 
-### Option 2: Local Installation
-
-**Prerequisites:**
-- Python 3.8 or later
-- pipenv (for dependency management)
-
-**Installation:**
-
-```bash
-# Install pipenv if you don't have it
-pip install pipenv
-
-# Install dependencies
-pipenv install
-
-# Activate virtual environment
-pipenv shell
-
-# Run migrations
-python manage.py migrate
-
-# Create a superuser (optional, for admin access)
-python manage.py createsuperuser
-
-# Run the development server
-python manage.py runserver
-```
 
 The application will be accessible at `http://localhost:8000`.
 
