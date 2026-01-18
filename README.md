@@ -1,5 +1,8 @@
 # DPS Backend Coding Challenge
 
+## Note
+
+This project was originally intended to be implemented using Express.js. However, I chose to implement it using Django and Django REST Framework because I have mastered this technology stack and wanted to demonstrate my expertise in it. I would like to thank Mrs Natalia Barsova for allowing me to showcase my skills using the framework I'm most proficient with.
 ## Overview: Round-Robin Tournament Service
 Your task is to build a backend service to manage round-robin sports tournaments. In a round-robin tournament, each participant must play against every other participant exactly once.
 
@@ -102,3 +105,5 @@ This helps us understand your workflow and decision-making process, not to judge
 See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for detailed API endpoints and usage examples.
 
 Happy coding!
+
+---

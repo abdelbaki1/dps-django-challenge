@@ -1,3 +1,41 @@
+  
+  ## How I Have Addressed the Challenge Requirements
+  
+ The project was designed to fully address the Challenge requirements:
+  
+  ### 1. **Tournament Management**
+  - **Create tournaments**: `POST /api/tournaments/` allows creating new tournaments
+  - **Add players to tournaments**: `POST /api/tournaments/{id}/add_player/` enables adding up to 5 players per tournament
+  - **Tournament constraints**: The system enforces the maximum of 5 participants per tournament
+  
+  ### 2. **Player Management**
+  - **Create players**: `POST /api/players/` creates new player profiles
+  - **Player assignment**: Players can be added to multiple tournaments
+  - **Player tracking**: Each player's performance is tracked across all their games
+  
+  ### 3. **Game Results**
+  - **Record game results**: `POST /api/games/` allows entering game outcomes
+  - **Points system implementation**:
+    - Win: 2 points (when `winner` is specified)
+    - Draw: 1 point each (when `is_draw` is true)
+    - Loss: 0 points (automatically calculated)
+  - **Round-robin validation**: Ensures each pair of players plays exactly once per tournament
+  
+  ### 4. **Special Leaderboard Endpoint** (Main Requirement)
+  The `GET /api/tournaments/{id}/leaderboard/` endpoint provides:
+  
+  **Tournament Status:**
+  - **Planning**: Tournament has less than 2 players or no games played
+  - **Started**: At least one game played but tournament not complete
+  - **Finished**: All required round-robin games completed (everyone played everyone)
+  
+  **Leaderboard Data:**
+  - List of all tournament participants
+  - Points sorted in descending order
+  - Detailed statistics: wins, draws, losses, games played
+  - Real-time updates as games are recorded
+  
+
 # API Documentation
 
 ## Base URL
